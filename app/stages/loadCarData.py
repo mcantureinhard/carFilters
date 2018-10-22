@@ -9,7 +9,6 @@ def run(state, data):
     rstr = 'http://0.0.0.0:5002/rest/cars_dict'
     r = requests.post(rstr, json={"ids":cars})
     json_data = r.json()
-    print(json_data)
     for car, car_info in json_data.items():
         carsMap[car] = car_info
     #With a real obj this loop probably would have been avoided

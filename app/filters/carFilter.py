@@ -18,7 +18,27 @@ class CarFilter:
                 _filter.processFilter(obj, filters, self.removalMap)
             if self.removalMap[id(obj)]["remove"] == 0:
                 self.outputList.append(obj)
-            for filter in filters:
+            for _filter in self.filters:
                 _filter.processAgg(obj, self.removalMap, self.aggMap)
-        return {"list" : self.outputList, "aggs" : self.aggMap}
+        filtersList = self.filtersFromAggs(filters)
+        return {"list" : self.outputList, "filters" : filtersList}
+    def filtersFromAggs(self, filters):
+        filtersList = []
+        for category, aggs in self.aggMap.items():
+            _filter = {'title' : category}
+            if category in filters:
+                applied = filters[category]
+            else:
+                applied = {}
+            aggregations = []
+            for aggName, count in aggs.items():
+                aggregation = {'title' : aggName, 'count' : count}
+                if aggName in applied:
+                    aggregation["selected"] = True
+                else:
+                    aggregation["selected"] = False
+                aggregations.append(aggregation)
+            _filter["aggregations"] = aggregations
+            filtersList.append(_filter)
+        return filtersList
             

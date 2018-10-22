@@ -10,6 +10,6 @@ def run(state, data):
     carFilter = CarFilter()
     result = carFilter.process(objList, filters)
     data["avAgg"] = result["list"]
-    data["aggs"] = result["aggs"]
+    data["filters"] = result["filters"]
 
     return(state,data)
