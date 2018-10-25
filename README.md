@@ -2,7 +2,14 @@
 
 ## Dependencies
 
+carAvAgg
+carsInformation
+
 ## How to run
+
+Create virtualenv for each repo.
+for each repo run pip install -r requirements.txt
+Run each with python main.py
 
 ## The idea
 The idea with this service is to have pipelines where data flows.
