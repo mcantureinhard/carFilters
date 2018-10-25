@@ -5,6 +5,7 @@ from flask import jsonify
 from app import app
 from json import dumps
 from app.pipelines.questionsData import QuestionsData
+from flask_cors import CORS, cross_origin
 
 rest_api = Blueprint('rest_api', __name__)
 
@@ -21,6 +22,7 @@ def questions_data(answers):
     return result
 
 @rest_api.route("/question_aggs", methods=["POST"])
+@cross_origin(origin='*',headers=['Content-Type'])
 def question_aggs():
     content = request.get_json()
     if "answers" not in content:
